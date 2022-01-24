@@ -5,7 +5,7 @@
 
 ## Usage
 
-```
+```vue
 <script>
     // connection and send user informations with emitting
     const socket = io("https://nodejs-socketioo.herokuapp.com");
