@@ -6,6 +6,10 @@ const server = app.listen(process.env.PORT || 5100);
 
 app.use(express.static("public"));
 
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
+
 const io = socket(server, {
   cors: {
     origin: "*",
