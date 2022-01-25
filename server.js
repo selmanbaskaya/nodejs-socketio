@@ -4,6 +4,7 @@ const socket = require("socket.io");
 const constant = require("./src/constant/Constant");
 const iot = require("./src/scripts/IoTStreamer");
 const axios = require("axios");
+const fs = require("fs");
 
 const app = express();
 const server = app.listen(process.env.PORT || 5100);
