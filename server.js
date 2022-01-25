@@ -32,6 +32,14 @@ io.on("connection", (socket) => {
   });
 
   socket.on("iotData", (data) => {
+    axios
+    .post(data.url, data.body)
+    .then((res) => {
+        console.log('RESPONSE: ', res.data);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
     console.log("PYTHON_TASK_DIR: ", constant.PYTHON_TASK_DIR);
     console.log("IoT's data: ", data);
 
