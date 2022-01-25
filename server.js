@@ -2,6 +2,7 @@ const express = require("express");
 const socket = require("socket.io");
 
 const constant = require("./src/constant/Constant");
+const axios = require("axios");
 
 const app = express();
 const server = app.listen(process.env.PORT || 5100);
