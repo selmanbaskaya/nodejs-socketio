@@ -1,10 +1,10 @@
 const express = require("express");
 const socket = require("socket.io");
 
-const fs = require("fs");
+/* const fs = require("fs");
 const axios = require("axios");
 const iot = require("./src/scripts/IoTStreamer");
-const constant = require("./src/constant/Constant");
+const constant = require("./src/constant/Constant"); */
 
 const app = express();
 const server = app.listen(process.env.PORT || 5100);
