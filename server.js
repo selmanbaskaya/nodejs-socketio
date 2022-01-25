@@ -1,6 +1,8 @@
 const express = require("express");
 const socket = require("socket.io");
 
+const constant = require("./src/constant/Constant");
+
 const app = express();
 const server = app.listen(process.env.PORT || 5100);
 
@@ -27,6 +29,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("iotData", (data) => {
+    console.log("PYTHON_TASK_DIR: ", constant.PYTHON_TASK_DIR);
     console.log("IoT's data: ", data);
 
     io.sockets.emit("response", { warningMsg: "IoT streaming has been reached its the limit value!" });
