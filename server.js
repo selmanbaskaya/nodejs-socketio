@@ -32,9 +32,9 @@ io.on("connection", (socket) => {
   });
 
   socket.on("iotData", (data) => {
-    axios
+    /* axios
       .post(data.url, data.body)
-      .then((res) => {
+      .then((res) => { */
         /* const iotValues = iot.extractResponseValueByKey(res.data, data.valuePath);
         const newLine = "\r\n" + iotValues[data["xLabel"]][0] + ", " + iotValues[data["yLabel"]][0];
         const csvFilePath = constant.PYTHON_TASK_DIR + data["userId"] + "/twinapi/" + data["fileName"]
@@ -49,9 +49,9 @@ io.on("connection", (socket) => {
         } else {
           io.sockets.emit("response", { responseData: res.data });
         }
-      })
+      /* })
       .catch((error) => {
         console.error(error);
-      });
+      }); */
   });
 });
