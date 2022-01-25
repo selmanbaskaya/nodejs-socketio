@@ -27,7 +27,7 @@ io.on("connection", (socket) => {
   socket.on("userInfo", (data) => {
     console.log("User's info: ", data);
 
-    const response = { message: `User (${data.name}) has been added!` };
+    const response = { message: "User has been added!" };
     io.sockets.emit("userInfoResponse", response);
   });
 
