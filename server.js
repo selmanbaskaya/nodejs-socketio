@@ -32,25 +32,31 @@ io.on("connection", (socket) => {
   });
 
   socket.on("iotData", async (data) => {
+    console.log("PYTHON_TASK_DIR: ", constant.PYTHON_TASK_DIR);
+    console.log("IoT's data: ", data);
     await axios
-    .post(data.url, data.body)
-    .then((res) => {
-        console.log('RESPONSE: ', res.data);
+      .post(data.url, data.body)
+      .then((res) => {
+        console.log("RESPONSE: ", res.data);
         const iotValues = iot.extractResponseValueByKey(res.data, data.valuePath);
         const newLine = "\r\n" + iotValues[data["xLabel"]][0] + ", " + iotValues[data["yLabel"]][0];
-        console.log('New Csv File Line: ', newLine);
-        /* const csvFilePath = constant.PYTHON_TASK_DIR + data["userId"] + "/twinapi/" + data["fileName"]
+        console.log("New Csv File Line: ", newLine);
+        /* const csvFilePath = constant.PYTHON_TASK_DIR + data["userId"] + "/twinapi/" + data["fileName"];
+        
         if (!fs.existsSync(csvFilePath)) {
           fs.writeFileSync(csvFilePath, "time,value");
         }
         fs.appendFileSync(csvFilePath, newLine); */
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-    console.log("PYTHON_TASK_DIR: ", constant.PYTHON_TASK_DIR);
-    console.log("IoT's data: ", data);
 
-    io.sockets.emit("response", { warningMsg: "IoT streaming has been reached its the limit value!" });
+        if (iotValues[data["yLabel"]][0] < 30) {
+          io.sockets.emit("response", { warningMsg: "IoT streaming has been reached its the limit value!" });
+        } else {
+          io.sockets.emit("response", { responseData: res.data });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    
   });
 });
