@@ -6,9 +6,9 @@ const server = app.listen(process.env.PORT || 5100);
 
 app.use(express.static("public"));
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
+app.get("/", (req, res) => {
+  res.send("Hello World!");
+});
 
 const io = socket(server, {
   cors: {
@@ -24,5 +24,11 @@ io.on("connection", (socket) => {
 
     const response = { message: `User (${data.name}) has been added!` };
     io.sockets.emit("userInfoResponse", response);
+  });
+
+  socket.on("iotData", (data) => {
+    console.log("IoT's data: ", data);
+
+    io.sockets.emit("response", { warningMsg: "IoT streaming has been reached its the limit value!" });
   });
 });
